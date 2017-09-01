@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-MAINTAINER Benoit Galati <benoit.galati@gmail.com>
+MAINTAINER PC
 
 ARG DEBIAN_FRONTEND=noninteractive
 
