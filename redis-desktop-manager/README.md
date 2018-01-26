@@ -11,5 +11,8 @@ docker run  -it --rm \
     -e SSH_AUTH_SOCK \
     -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK \
     --name redis-desktop-manager \
-    benoitg/redis-desktop-manager
+    redis-desktop-manager
 ```
+
+Nota1: Usar el nombre de la imagen buildeada
+Nota2: para activar ui correr xhost +local:docker > /dev/null 

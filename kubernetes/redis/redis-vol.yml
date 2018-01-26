@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: default
+  name: redis-data
+  labels:
+      app: xonic-rds-redis
+      release: xonic-rds
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 8Gi
+  hostPath:
+    path: /tmp

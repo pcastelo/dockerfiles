@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "xonic-mysql"
+  namespace: default
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "xonic-mysql"
+    spec:
+      containers:
+      - name: xonic-mysql
+        image: nexus.gdmlabs.net:5000/mysqlx:5.7.17   # or just image: redis
+        env:
+         - name: MYSQL_ROOT_PASSWORD
+           value: root
+         - name: MYSQL_DATABASE
+           value: xonic
+         - name: MYSQL_USER
+           value: xonic
+         - name: MYSQL_PASSWORD
+           value: ovlxonicnalabs
+        imagePullPolicy: "IfNotPresent"
+        ports:
+            - containerPort: 3306
+            - containerPort: 33060
+        volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              name: mysql-data
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-rds-data
+

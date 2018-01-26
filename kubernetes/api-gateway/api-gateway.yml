@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "xonic-api-gtw"
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: "xonic-api-gtw"
+    spec:
+      containers:
+      - name: xonic-api-gtw
+        image: nexus.gdmlabs.net:5000/xonic-api-gtw:latest  # or just image: redis
+        env:
+         - name: SPRING_PROFILES_ACTIVE
+           value: desa
+        resources:
+          requests:
+            cpu: 200m
+            memory: 1024Mi
+        imagePullPolicy: "IfNotPresent"
+        ports:
+            - containerPort: 28080
+        volumeMounts:
+            - mountPath: "/log"
+              name: api-gtw-data
+      volumes:
+        - name: api-gtw-data
+          persistentVolumeClaim:
+            claimName: api-gtw-data
+
